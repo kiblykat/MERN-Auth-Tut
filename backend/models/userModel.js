@@ -15,14 +15,15 @@ const userSchema = new Schema({
   },
 });
 
-//static signup method (similar to methods in cpp/Java)
+//static signup method (similar to class methods in cpp/Java)
 userSchema.statics.signup = async function (email, password) {
+  //can't use "User" since not created in userModel file
   const exists = await this.findOne({ email });
 
   if (exists) {
     throw Error("Email already in use");
   }
-
+  //addition of "salt" to password, increases security
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
