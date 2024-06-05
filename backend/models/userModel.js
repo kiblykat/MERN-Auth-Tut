@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
 });
 
-//static signup method (similar to class methods in cpp/Java)
+//static signup method (similar to class methods in cpp/Java, static: belonging to the class as opposed to instance)
 userSchema.statics.signup = async function (email, password) {
   //can't use "User" since not created in userModel file
   const exists = await this.findOne({ email });
