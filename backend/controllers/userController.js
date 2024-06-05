@@ -9,7 +9,7 @@ const loginUser = async (req, res) => {
 const signupUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    //using signup method in userSchema
+    //using signup method in userSchema to create the User
     const user = await User.signup(email, password);
     res.status(200).json({ email, user });
   } catch (err) {
