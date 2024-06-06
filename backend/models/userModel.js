@@ -15,8 +15,9 @@ const userSchema = new Schema({
     required: true,
   },
 });
-
-//static signup method (similar to class methods in cpp/Java, static: belonging to the class as opposed to instance)
+// Static: belong to class, Instance: belong to instance of class
+// static signup method (similar to class methods in cpp/Java)
+// this method is used for hashing and validating
 userSchema.statics.signup = async function (email, password) {
   //validation
   if (!email || !password) {

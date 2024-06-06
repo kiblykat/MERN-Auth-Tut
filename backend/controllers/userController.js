@@ -28,9 +28,10 @@ const signupUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     //using signup method in userSchema to create the User
+    //returned user will contain object of {email, hashed p/w}
     const user = await User.signup(email, password);
 
-    //create a token
+    //create a token using the user._id (not password/email)
     const token = createToken(user._id);
 
     //now, we are passing the token to the browser as the second property of the response object
