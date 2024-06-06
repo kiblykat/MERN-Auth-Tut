@@ -1,27 +1,26 @@
-import { createContext, useReducer } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
-export const authReducer = (state, action) => {
-  switch (action.type) {
-    case "LOGIN":
-      return { user: action.payload };
-    case "LOGOUT":
-      return { user: null };
-    default:
-      return state;
-  }
-};
-
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, {
-    user: null,
-  });
+  //create a user state that is shared Context in all components
+  const [user, setUser] = useState(null);
 
-  console.log("AuthContext state: ", state);
+  //login method to pass userData to current user credentials
+  const login = (userData) => {
+    setUser(userData);
+  };
 
+  //logout method to set User back to null
+  const logout = () => {
+    setUser(null);
+  };
+
+  console.log("AuthContext state: ", user);
+
+  //passing the user login and logout functions to wrap App component
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
