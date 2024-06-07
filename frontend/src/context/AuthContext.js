@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
 
   //passing the user login and logout functions to wrap App component
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
